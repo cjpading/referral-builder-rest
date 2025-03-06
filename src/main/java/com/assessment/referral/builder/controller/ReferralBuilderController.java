@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +28,13 @@ public class ReferralBuilderController {
 	public ResponseEntity<ApiResponse<List<ReferralBuilderDto>>> getReferralList() {
 		List<ReferralBuilderDto> referralList = referralBuilderService.getReferralList();
 		ApiResponse<List<ReferralBuilderDto>> apiResponse = new ApiResponse<List<ReferralBuilderDto>>("success", referralList);
+		return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+	}
+	
+	@PostMapping("/create-referral")
+	public ResponseEntity<ApiResponse<ReferralBuilderDto>> createReferral(@RequestBody ReferralBuilderDto referralBuilder) {
+		ReferralBuilderDto referralBuilderDto = referralBuilderService.createReferral(referralBuilder);
+		ApiResponse<ReferralBuilderDto> apiResponse = new ApiResponse<>("success", referralBuilderDto);
 		return new ResponseEntity<>(apiResponse, HttpStatus.OK);
 	}
 	

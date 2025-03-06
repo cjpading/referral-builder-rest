@@ -34,5 +34,9 @@ public class ReferralBuilderService {
 		return referralBuilderDtoList;
 	}
 	
-	// createReferral
+	public ReferralBuilderDto createReferral(ReferralBuilderDto referralDto) {
+		referralDto.setId(referralBuilderDtoList.size() + 1);
+		referralBuilderDtoList.add(referralDto);
+		return referralDto;
+	}
 }
